@@ -3,11 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Audio Auto Play</title>
+  <title>Wireframe Audio Player</title>
+  <style>
+    body {
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Wireframe box */
+    .frame {
+      width: 300px;
+      height: 80px;
+      border: 2px solid #fff;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 0 8px #fff);
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Play button */
+    .play-btn {
+      font-size: 36px;
+      color: #fff;
+      font-family: monospace;
+      user-select: none;
+      transition: 0.2s;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 10px #fff;
+    }
+
+    /* Hidden audio element */
+    audio {
+      display: none;
+    }
+  </style>
 </head>
-<body style="margin:0; background:#000;">
-  <audio autoplay loop>
-    <source src="https://files.catbox.moe/dhi07p.wav" type="audio/wav">
-  </audio>
+<body>
+  <div class="frame" id="frame">
+    <div class="play-btn" id="playBtn">&gt;</div>
+    <audio id="audio" loop>
+      <source src="https://files.catbox.moe/dhi07p.wav" type="audio/wav">
+    </audio>
+  </div>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playBtn');
+    const frame = document.getElementById('frame');
+
+    playBtn.addEventListener('click', () => {
+      audio.play();
+      playBtn.style.display = 'none';
+      frame.style.cursor = 'default';
+    });
+  </script>
 </body>
 </html>
