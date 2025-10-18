@@ -1,71 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wireframe Audio Player</title>
-  <style>
-    body {
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    /* Wireframe box */
-    .frame {
-      width: 300px;
-      height: 80px;
-      border: 2px solid #fff;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      filter: drop-shadow(0 0 8px #fff);
-      cursor: pointer;
-      position: relative;
-    }
-
-    /* Play button */
-    .play-btn {
-      font-size: 36px;
-      color: #fff;
-      font-family: monospace;
-      user-select: none;
-      transition: 0.2s;
-    }
-
-    .play-btn:hover {
-      transform: scale(1.1);
-      text-shadow: 0 0 10px #fff;
-    }
-
-    /* Hidden audio element */
-    audio {
-      display: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe Audio Player</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #audioContainer {
+    width: 200px;
+    height: 200px;
+    border: 3px solid white;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  #playButton {
+    font-size: 40px;
+    color: white;
+    user-select: none;
+  }
+  #audioContainer:active {
+    transform: scale(0.95);
+  }
+</style>
 </head>
 <body>
-  <div class="frame" id="frame">
-    <div class="play-btn" id="playBtn">&gt;</div>
-    <audio id="audio" loop>
-      <source src="https://files.catbox.moe/9sja8r.wav" type="audio/wav">
-    </audio>
-  </div>
 
-  <script>
-    const audio = document.getElementById('audio');
-    const playBtn = document.getElementById('playBtn');
-    const frame = document.getElementById('frame');
+<div id="audioContainer">
+  <div id="playButton">&#9654;</div> <!-- Play symbol -->
+</div>
 
-    playBtn.addEventListener('click', () => {
+<audio id="myAudio">
+  <source src="https://files.catbox.moe/9sja8r.wav" type="audio/wav">
+  Your browser does not support the audio element.
+</audio>
+
+<script>
+  const audio = document.getElementById('myAudio');
+  const container = document.getElementById('audioContainer');
+  const button = document.getElementById('playButton');
+  
+  container.addEventListener('click', () => {
+    if(audio.paused){
       audio.play();
-      playBtn.style.display = 'none';
-      frame.style.cursor = 'default';
-    });
-  </script>
+      button.innerHTML = "❚❚"; // Pause symbol
+    } else {
+      audio.pause();
+      button.innerHTML = "&#9654;"; // Play symbol
+    }
+  });
+</script>
+
 </body>
 </html>
